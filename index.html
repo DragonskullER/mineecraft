@@ -2,13 +2,40 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Voxel Prototype</title>
+    <title>Mineecraft — Voxel Prototype</title>
     <style>
-      html,body { margin:0; height:100%; overflow:hidden; }
+      html,body { margin:0; padding:0; height:100%; overflow:hidden; font-family:Arial,sans-serif; }
       canvas { display:block; }
+      #hud { position:fixed; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:10; }
+      .ui-panel { position:fixed; pointer-events:auto; background:rgba(0,0,0,0.5); color:#fff; padding:10px; border-radius:4px; font-size:12px; }
+      #controls-menu { top:8px; right:8px; width:260px; }
+      #controls-menu button { width:100%; padding:4px; margin:4px 0; }
+      #webgui-panel { top:200px; right:8px; width:280px; display:none; }
+      .crosshair { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:30px; height:30px; pointer-events:none; }
+      .crosshair::before, .crosshair::after { content:''; position:absolute; background:#fff; }
+      .crosshair::before { width:20px; height:2px; top:14px; left:5px; }
+      .crosshair::after { width:2px; height:20px; top:5px; left:14px; }
     </style>
   </head>
   <body>
-    <script type="module" src="./main.js"></script>
+    <div id="hud">
+      <div id="controls-menu" class="ui-panel">
+        <div style="font-weight:bold;margin-bottom:8px">Controls</div>
+        <button id="remap-btn">Remap Keys</button>
+        <button id="webgui-btn">webGUI (Cheats)</button>
+        <label style="display:block;margin-top:8px">
+          <input type="checkbox" id="ultra-low-toggle"> Ultra Low (3D)
+        </label>
+      </div>
+      <div id="webgui-panel" class="ui-panel">
+        <div style="font-weight:bold;margin-bottom:8px">webGUI — Cheats</div>
+        <label style="display:block"><input type="checkbox" id="cheat-fly"> Fly</label>
+        <label style="display:block;margin-top:6px">Speed: <input type="range" id="cheat-speed" min="0.5" max="4" step="0.1" value="1" style="width:100px"></label>
+        <label style="display:block;margin-top:6px"><input type="checkbox" id="cheat-god"> Godmode</label>
+        <button id="close-webgui" style="width:100%;margin-top:8px">Close</button>
+      </div>
+      <div class="crosshair"></div>
+    </div>
+    <script type="module" src="./main_eagler.js"></script>
   </body>
 </html>
